@@ -1,9 +1,0 @@
-{
-    "sqltools.connections": [
-        {
-            "database": ".\\ProAgil.WebAPI\\ProAgil.db",
-            "dialect": "SQLite",
-            "name": "ProAgil"
-        }
-    ]
-}
