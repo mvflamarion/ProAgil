@@ -31,12 +31,12 @@ namespace ProAgil.WebAPI.Controllers
             }
         }
 
-        [HttpGet("{eventoId}")]
-        public async Task<IActionResult> Get(int eventoId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-                var results = await _repo.GetEventoAsyncById(eventoId, true);
+                var results = await _repo.GetEventoAsyncById(id, true);
                 return Ok(results);
             }
             catch (System.Exception)
@@ -76,15 +76,15 @@ namespace ProAgil.WebAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(int eventoId, Evento model)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, Evento model)
         {
             try
             {
-                var evento = await _repo.GetEventoAsyncById(eventoId);
+                var evento = await _repo.GetEventoAsyncById(id);
                 if (evento == null) return NotFound();
 
-                _repo.Add(model);
+                _repo.Update(model);
 
                 if (await _repo.SaveChangesAsync())
                     return Created($"/api/eventos/{model.Id}", model);
@@ -96,15 +96,15 @@ namespace ProAgil.WebAPI.Controllers
             return BadRequest();
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int eventoId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var evento = await _repo.GetEventoAsyncById(eventoId);
+                var evento = await _repo.GetEventoAsyncById(id);
                 if (evento == null) return NotFound();
 
-                _repo.Add(evento);
+                _repo.Delete(evento);
 
                 if (await _repo.SaveChangesAsync())
                     return NoContent();
