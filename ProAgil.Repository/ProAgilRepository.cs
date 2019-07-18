@@ -39,7 +39,7 @@ namespace ProAgil.Repository
                     .Include(pe => pe.PalestranteEventos)
                     .ThenInclude(p => p.Palestrante);
 
-            query = query.OrderByDescending(c => c.DataEvento);
+            query = query.OrderBy(c => c.Id);
 
             return await query.ToArrayAsync();
         }
@@ -55,7 +55,7 @@ namespace ProAgil.Repository
                     .Include(pe => pe.PalestranteEventos)
                     .ThenInclude(p => p.Palestrante);
 
-            query = query.OrderByDescending(c => c.DataEvento)
+            query = query.OrderBy(c => c.Id)
                 .Where(c => c.Tema.ToLower().Contains(tema.ToLower()));
 
             return await query.ToArrayAsync();
