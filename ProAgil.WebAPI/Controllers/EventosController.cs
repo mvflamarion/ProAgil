@@ -25,7 +25,7 @@ namespace ProAgil.WebAPI.Controllers
         }
 
         [HttpPost("upload")]
-        public async Task<IActionResult> Upload()
+        public IActionResult Upload()
         {
             try
             {

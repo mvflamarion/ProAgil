@@ -43,8 +43,8 @@ import { TituloComponent } from "./_shared/titulo/titulo.component";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: "toast-bottom-right",
+      timeOut: 3000,
+      positionClass: "toast-top-right",
       preventDuplicates: true
     })
   ],
