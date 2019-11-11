@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Evento } from "../_models/evento";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Evento } from '../_models/evento';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class EventoService {
-  baseURL = "http://localhost:5000/api/eventos";
+  baseURL = 'http://localhost:5000/api/eventos';
 
   constructor(private http: HttpClient) {}
 
@@ -24,9 +24,9 @@ export class EventoService {
   }
 
   postUpload(file: File, name: string) {
-    const fileToUpload = <File>file[0];
+    const fileToUpload = file[0] as File;
     const formData = new FormData();
-    formData.append("file", fileToUpload, name);
+    formData.append('file', fileToUpload, name);
 
     return this.http.post(`${this.baseURL}/upload`, formData);
   }
