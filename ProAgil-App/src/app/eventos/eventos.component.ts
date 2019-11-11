@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { EventoService } from "../_services/evento.service";
-import { Evento } from "../_models/evento";
-import { BsModalService } from "ngx-bootstrap";
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-import { defineLocale, BsLocaleService, ptBrLocale } from "ngx-bootstrap";
-import { ToastrService } from "ngx-toastr";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { Component, OnInit } from '@angular/core';
+import { EventoService } from '../_services/evento.service';
+import { Evento } from '../_models/evento';
+import { BsModalService } from 'ngx-bootstrap';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { defineLocale, BsLocaleService, ptBrLocale } from 'ngx-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
-defineLocale("pt-br", ptBrLocale);
+defineLocale('pt-br', ptBrLocale);
 
 @Component({
-  selector: "app-eventos",
-  templateUrl: "./eventos.component.html",
-  styleUrls: ["./eventos.component.css"]
+  selector: 'app-eventos',
+  templateUrl: './eventos.component.html',
+  styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent implements OnInit {
-  titulo = "Eventos";
+  titulo = 'Eventos';
   eventosFiltrados: Evento[];
   eventos: Evento[];
   evento: Evento;
@@ -24,12 +24,12 @@ export class EventosComponent implements OnInit {
   mostrarImagem = false;
   registerForm: FormGroup;
   novoRegistro = false;
-  bodyDeletarEvento = "";
+  bodyDeletarEvento = '';
   file: File;
   fileNameToUpdate: string;
   dataAtual: string;
 
-  _filtroLista = "";
+  _filtroLista = '';
 
   get filtroLista(): string {
     return this._filtroLista;
@@ -48,7 +48,7 @@ export class EventosComponent implements OnInit {
     private localeService: BsLocaleService,
     private toastr: ToastrService
   ) {
-    this.localeService.use("pt-br");
+    this.localeService.use('pt-br');
   }
 
   ngOnInit() {
@@ -59,9 +59,7 @@ export class EventosComponent implements OnInit {
   excluirEvento(evento: Evento, template: any) {
     this.openModal(template);
     this.evento = evento;
-    this.bodyDeletarEvento = `Tem certeza que deseja excluir o Evento: ${
-      evento.tema
-    }, Código: ${evento.id}`;
+    this.bodyDeletarEvento = `Tem certeza que deseja excluir o Evento: ${evento.tema}, Código: ${evento.id}`;
   }
 
   confirmeDelete(template: any) {
@@ -69,10 +67,10 @@ export class EventosComponent implements OnInit {
       () => {
         template.hide();
         this.getEventos();
-        this.toastr.success("Deletado com sucesso.");
+        this.toastr.success('Deletado com sucesso.');
       },
       error => {
-        this.toastr.error("Erro ao tentar deletar.");
+        this.toastr.error('Erro ao tentar deletar.');
         console.log(error);
       }
     );
@@ -83,7 +81,7 @@ export class EventosComponent implements OnInit {
     this.openModal(template);
     this.evento = Object.assign({}, evento);
     this.fileNameToUpdate = evento.imagemURL.toString();
-    this.evento.imagemURL = "";
+    this.evento.imagemURL = '';
     this.registerForm.patchValue(this.evento);
   }
 
@@ -95,18 +93,18 @@ export class EventosComponent implements OnInit {
   validation() {
     this.registerForm = this.fb.group({
       tema: [
-        "",
+        '',
         [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
       ],
-      local: ["", Validators.required],
-      dataEvento: ["", Validators.required],
+      local: ['', Validators.required],
+      dataEvento: ['', Validators.required],
       qtdPessoas: [
-        "",
+        '',
         [Validators.required, Validators.max(100000), Validators.min(1)]
       ],
-      imagemURL: ["", Validators.required],
-      telefone: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]]
+      imagemURL: ['', Validators.required],
+      telefone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -121,7 +119,7 @@ export class EventosComponent implements OnInit {
 
   uploadImage() {
     if (this.novoRegistro) {
-      const nomeArquivo = this.evento.imagemURL.split("\\", 3);
+      const nomeArquivo = this.evento.imagemURL.split('\\', 3);
       this.evento.imagemURL = nomeArquivo[2];
       this.eventoService.postUpload(this.file, nomeArquivo[2]).subscribe(() => {
         this.dataAtual = new Date().getMilliseconds().toString();
@@ -150,10 +148,10 @@ export class EventosComponent implements OnInit {
             console.log(novoEvento);
             template.hide();
             this.getEventos();
-            this.toastr.success("Inserido com sucesso!");
+            this.toastr.success('Inserido com sucesso!');
           },
           error => {
-            this.toastr.error("Erro ao inserir.");
+            this.toastr.error('Erro ao inserir.');
             console.log(error);
           }
         );
@@ -169,10 +167,10 @@ export class EventosComponent implements OnInit {
           () => {
             template.hide();
             this.getEventos();
-            this.toastr.success("Editado com sucesso!");
+            this.toastr.success('Editado com sucesso!');
           },
           error => {
-            this.toastr.error("Erro ao cadastrar.");
+            this.toastr.error('Erro ao cadastrar.');
             console.log(error);
           }
         );
@@ -203,7 +201,7 @@ export class EventosComponent implements OnInit {
         this.eventosFiltrados = this.eventos;
       },
       error => {
-        this.toastr.error("Erro ao tentar carregar eventos.");
+        this.toastr.error('Erro ao tentar carregar eventos.');
         console.log(error);
       }
     );
