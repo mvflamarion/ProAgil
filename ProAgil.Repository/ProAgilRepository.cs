@@ -29,7 +29,7 @@ namespace ProAgil.Repository
         }
         public void DeleteRange<T>(T[] entity)
         {
-            _context.DeleteRange(entity);
+            _context.RemoveRange(entity);
         }
 
         public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantres = false)

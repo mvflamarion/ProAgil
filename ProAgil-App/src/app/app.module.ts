@@ -26,6 +26,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { NgxMaskModule } from 'ngx-mask';
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxCurrencyModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

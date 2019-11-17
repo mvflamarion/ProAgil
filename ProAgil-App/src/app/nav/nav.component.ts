@@ -30,4 +30,8 @@ export class NavComponent implements OnInit {
     this.toastr.show('Já estamos com saudade!');
     this.router.navigate(['/user/login']);
   }
+
+  userName() {
+    return sessionStorage.getItem('username');
+  }
 }

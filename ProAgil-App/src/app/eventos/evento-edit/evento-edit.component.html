@@ -116,11 +116,10 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label>Preço</label>
-                    <input type="text" class="form-control" [ngClass]="{
-                      'is-invalid':
-                        lotes.get(i+'.preco').errors &&
-                        lotes.get(i+'.preco').touched
-                    }" formControlName="preco" placeholder="R$ 0,00">
+                    <input type="text" currencyMask
+                      [options]="{ prefix: 'R$', thousands: '.', decimal: ',', align: 'left'}"
+                      class="form-control" 
+                      [ngClass]="{'is-invalid': lotes.get(i+'.preco').errors && lotes.get(i+'.preco').touched}" formControlName="preco" placeholder="R$ 0,00">
                   </div>
                   <div class="form-group col-md-4">
                     <label>Data Início</label>
@@ -223,8 +222,10 @@
           </p>
           <div class="row">
             <div class="icon-block col-md-8 iconesSociais">
-              <a class="mr-3" target="_blank">
-                <i class="fab fa-youtube"></i>
+              <a href="{{redesSociais.get(i+'.url').value}}" 
+                *ngFor="let redeSocial of redesSociais.controls; let i=index;"
+                class="mr-3" target="_blank">
+                <i class="{{redesSociais.get(i+'.nome').value}}"></i>
               </a>
             </div>
             <!--div class="col-md-4 d-flex justify-content-center">  
